@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  front:
+    build: ./frontend
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    networks:
+      - frontend
+    depends_on:
+      - back
+
+  back:
+    build:
+      context: backend/.
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+      - frontend
+
+  back_db:
+    build:
+      context: database/.
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - backend
+      - frontend
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - back
+      
+  back_post:
+    build:
+      context: post_dk/.
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
+
+volumes:
+  db_data:
