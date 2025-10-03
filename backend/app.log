@@ -1,0 +1,58 @@
+[2025-09-26 22:32:02.135] INFO __main__:19 - Logging configured
+[2025-09-26 22:33:04.248] INFO __main__:19 - Logging configured
+[2025-09-26 22:33:07.249] INFO apis.users:20 - Login successful for user trololo22
+[2025-09-26 22:34:29.262] INFO __main__:19 - Logging configured
+[2025-09-26 22:36:35.359] INFO __main__:19 - Logging configured
+[2025-09-26 22:36:38.442] INFO apis.users:20 - Login successful for user trololo22
+[2025-09-26 22:38:07.300] INFO __main__:19 - Logging configured
+[2025-09-26 22:38:36.740] INFO __main__:19 - Logging configured
+[2025-09-26 22:38:42.536] INFO apis.users:21 - Login successful for user trololo22
+[2025-09-26 22:40:45.963] INFO __main__:19 - Logging configured
+[2025-09-26 22:40:49.684] INFO apis.users:21 - Login successful for user trololo22
+[2025-09-26 22:45:45.814] INFO __main__:19 - Logging configured
+[2025-09-26 22:45:49.105] INFO apis.users:22 - Login successful for user trololo22
+[2025-09-26 23:25:21.661] INFO __main__:19 - Logging configured
+[2025-09-26 23:25:36.967] INFO apis.users:21 - Login successful for user trololo22
+[2025-09-26 23:28:41.209] INFO __main__:19 - Logging configured
+[2025-09-26 23:31:50.784] INFO __main__:19 - Logging configured
+[2025-09-26 23:32:11.755] INFO __main__:19 - Logging configured
+[2025-09-26 23:32:14.736] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:32:44.925] INFO __main__:19 - Logging configured
+[2025-09-26 23:32:48.003] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:32:59.909] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:34:06.771] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:35:07.992] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:35:23.842] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:36:25.247] INFO __main__:19 - Logging configured
+[2025-09-26 23:36:28.392] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:36:49.766] INFO __main__:19 - Logging configured
+[2025-09-26 23:36:53.451] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:37:09.095] INFO __main__:19 - Logging configured
+[2025-09-26 23:37:12.669] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:37:57.131] INFO __main__:19 - Logging configured
+[2025-09-26 23:38:03.310] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:40:41.124] INFO __main__:19 - Logging configured
+[2025-09-26 23:40:44.227] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-26 23:41:19.036] INFO __main__:19 - Logging configured
+[2025-09-26 23:41:22.697] INFO apis.users:24 - Login successful for user trololo22
+[2025-09-26 23:43:46.208] INFO __main__:19 - Logging configured
+[2025-09-26 23:43:49.128] INFO apis.users:24 - Login successful for user trololo22
+[2025-09-26 23:45:05.600] INFO __main__:19 - Logging configured
+[2025-09-26 23:45:08.521] INFO apis.users:24 - Login successful for user trololo22
+[2025-09-26 23:46:20.879] INFO apis.users:24 - Login successful for user trololo22
+[2025-09-26 23:46:49.574] INFO __main__:19 - Logging configured
+[2025-09-26 23:46:52.398] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:08:27.814] INFO __main__:19 - Logging configured
+[2025-09-27 12:08:35.768] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:09:55.840] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:10:47.277] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:10:59.236] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:12:48.420] INFO __main__:19 - Logging configured
+[2025-09-27 12:12:51.119] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:13:13.303] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:14:52.175] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:18:49.866] INFO apis.users:23 - Login successful for user trololo22
+[2025-09-27 12:20:35.551] INFO __main__:19 - Logging configured
+[2025-09-27 12:20:37.933] WARNING apis.users:26 - Login failed for user trololo22
+[2025-09-27 12:21:09.549] INFO apis.users:23 - Login successful for user trolololo22
+[2025-09-27 19:55:07.233] INFO __main__:19 - Logging configured

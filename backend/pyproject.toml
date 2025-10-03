@@ -1,0 +1,17 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "authx>=1.4.3",
+    "datetime>=5.5",
+    "fastapi>=0.117.1",
+    "httpx>=0.28.1",
+    "logging>=0.4.9.6",
+    "pydantic-settings>=2.10.1",
+    "pydentic>=0.0.1.dev3",
+    "requests>=2.32.5",
+    "uvicorn>=0.36.0",
+]

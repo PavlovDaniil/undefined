@@ -1,0 +1,218 @@
+/* ========================================================= */
+/* БАЗОВЫЕ СТИЛИ (MOBILE-FIRST) */
+/* ========================================================= */
+
+.footer-container {
+    background-color: transparent; 
+    padding: 0; /* Убираем лишние отступы, как обсуждалось ранее */
+    margin: 0; 
+    position: relative;
+}
+
+.footer-wrapper {
+    background: #62A744;
+    border-radius: 29px;
+    border: 4px white solid;
+    padding: 20px; /* Адаптивный внутренний отступ */
+    position: relative;
+    /* Используем Flexbox для мобильной компоновки */
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Пространство между секциями */
+}
+
+/* Колонки навигации (1, 2, 3) */
+.footer-links-section {
+    display: flex;
+    flex-direction: column; /* На мобильных - колонки идут вертикально */
+    gap: 20px;
+    padding-left: 15px;
+    padding-top: 20px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.column-title {
+    color: white;
+    font-size: 23px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.column-link {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* Контакты, Карта, Логотип */
+.footer-contacts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 15px;
+}
+
+.contact-social-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-group, .contact-group {
+    /* Небольшое пространство между группами контактов/соцсетей */
+}
+
+.social-title {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.social-icon {
+    width: 39px;
+    height: 39px;
+}
+
+.contact-org {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.contact-details {
+    color: white;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+/* Карта и Адрес */
+.address-map-group {
+    margin-top: 15px;
+}
+
+.address-text {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.address-label {
+    font-weight: 700;
+    margin-right: 15px; /* Для небольшого пробела */
+}
+
+.map-placeholder {
+    background: #D9D9D9;
+    border-radius: 20px; /* Уменьшаем радиус для мобильных */
+    height: 150px; /* Адаптивная высота */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-text {
+    color: black;
+    font-size: 20px;
+}
+
+.footer-logo {
+    display: none; /* Скрываем на мобильных, так как место ограничено */
+}
+
+/* Копирайт */
+.footer-copyright {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: auto; /* Прижимаем вниз */
+}
+
+.copyright-text {
+    color: white;
+    font-size: 14px;
+}
+
+
+/* ========================================================= */
+/* DESKTOP СТИЛИ (Применяются от 1024px и выше) */
+/* ========================================================= */
+
+@media (min-width: 1024px) {
+    .footer-wrapper {
+        /* Восстанавливаем оригинальные пропорции макета на десктопе */
+        height: 400px;
+        padding: 10px 20px;
+        display: grid;
+        /* Используем Grid для четкого расположения секций */
+        grid-template-areas: 
+            "links contacts logo"
+            "copyright . .";
+        grid-template-columns: 2fr 1.5fr 0.5fr; /* Настройка ширины колонок */
+        gap: 0;
+    }
+
+    /* Секция ссылок: три колонки в ряд */
+    .footer-links-section {
+        grid-area: links;
+        display: flex;
+        flex-direction: row;
+        gap: 70px; /* Пространство между колонками */
+        padding: 0;
+    }
+    
+    .footer-column:nth-child(1) { width: 162px; }
+    .footer-column:nth-child(2) { width: 202px; }
+    .footer-column:nth-child(3) { width: 332px; }
+
+
+    /* Секция контактов, адреса и карты */
+    .footer-contacts-section {
+        grid-area: contacts;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin-top: -30px; /* Корректировка вертикального выравнивания */
+    }
+
+    .contact-social-row {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    /* Адрес и Карта */
+    .address-map-group {
+        margin-top: 0;
+        max-width: 644px; /* Ограничиваем ширину, как было в оригинале */
+    }
+
+    .map-placeholder {
+        border-radius: 44px; /* Восстанавливаем оригинальный радиус */
+        height: 219px;
+    }
+
+    /* Логотип справа */
+    .footer-logo {
+        grid-area: logo;
+        display: block;
+        width: 88px;
+        height: 88px;
+        position: absolute; /* Позиционируем относительно footer-wrapper */
+        right: 40px; 
+        top: 35px;
+    }
+    
+
+}

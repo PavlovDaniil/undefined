@@ -1,0 +1,176 @@
+/* Reset top spacing to avoid white bar */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default body background to let hero image start at very top */
+body { background: transparent; }
+
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
+}
+
+/* Делает все внутренние контейнеры полноширинными, но с комфортными отступами */
+.container-narrow {
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Typography rhythm */
+h1, .h1 { margin: 0 0 16px; line-height: 1.2; }
+h2, .h2 { margin: 0 0 14px; line-height: 1.25; }
+h3, .h3 { margin: 0 0 12px; line-height: 1.3; }
+.lead { font-size: 18px; color: var(--muted); }
+
+/* Sections spacing */
+.section { padding-top: 56px; padding-bottom: 56px; }
+@media (min-width: 992px) {
+  .section { padding-top: 72px; padding-bottom: 72px; }
+}
+
+/* Протяжка шапки, секций и карточек на всю ширину с внутренними отступами */
+.navbar { width: 100%; }
+.section > .container-narrow, header.section > .container-narrow {
+  width: 100%;
+}
+.card, .service-tile, .partners { width: 100%; }
+
+/* Navbar polish */
+.navbar .nav-link { transition: color .2s ease; }
+.navbar .nav-link:hover, .navbar .nav-link:focus { color: var(--primary); text-decoration: none; }
+.navbar .nav-link.active { color: var(--text); }
+
+/* Buttons */
+.btn { border-radius: 10px; }
+.btn-lg { padding: 10px 18px; }
+
+/* Cards */
+.card { border-radius: 12px; }
+.card .card-body { padding: 20px; }
+.card.shadow-sm { box-shadow: 0 10px 28px rgba(0,0,0,0.15); }
+
+/* Service icon */
+.service-icon { font-weight: 600; }
+
+/* Code card */
+.code-card { background: var(--surface); }
+.code-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 16px rgba(108,194,74,0.8); }
+.code-block { margin: 0; padding: 14px 16px; background: #0b0f14; color: #e6eef3; border-radius: 10px; overflow-x: auto; border: 1px solid var(--border); }
+.kbd { display: inline-block; padding: 2px 6px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); }
+
+/* Tiles */
+.tile { transition: transform .2s ease, box-shadow .2s ease; }
+.tile:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
+
+/* Version cards */
+.version-card .badge { border: 1px solid var(--border); }
+
+/* Tables */
+.table th, .table td { padding: 12px 14px; }
+.table-hover > tbody > tr:hover > * { background-color: rgba(0,0,0,0.03); }
+html[data-theme="dark"] .table-hover > tbody > tr:hover > * { background-color: rgba(255,255,255,0.06); }
+
+/* Footer */
+footer { border-color: var(--border) !important; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--primary); }
+
+/* ============== New Home styles (approx like gucodd.ru) ============== */
+:root {
+  --brand: #62a744;
+  --brand-dark: #4a8a35;
+}
+
+@font-face {
+  font-family: 'Moscow Sans';
+  src: local('Moscow Sans');
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  background: radial-gradient(1200px 400px at 70% -10%, rgba(98,167,68,0.35), transparent),
+              linear-gradient(180deg, rgba(98,167,68,0.12), rgba(98,167,68,0.0));
+}
+.hero .badge {
+  background: rgba(98,167,68,0.12);
+  color: var(--brand-dark);
+  border: 1px solid rgba(98,167,68,0.25);
+}
+
+.metrics-strip {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.metric {
+  min-width: 140px;
+}
+.metric .value { color: var(--brand); font-weight: 700; }
+
+.service-tile {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.service-tile:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,0.16); }
+.service-ico {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(98,167,68,0.12);
+  border: 1px solid rgba(98,167,68,0.25);
+  color: var(--brand-dark);
+}
+
+.partners {
+  border: 1px solid var(--border);
+  border-radius: 12px; background: #fff;
+}

@@ -1,0 +1,525 @@
+/* Ограничение максимальной ширины для всех изображений */
+img {
+  max-width: 70cap;
+  float: left;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.section {
+  padding: 2rem 1rem;
+  background-color: #f9fafb;
+}
+
+.container-narrow {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ================= ГЛАВНАЯ СЕКЦИЯ ================= */
+.service-tile {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .service-tile {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 3rem;
+  }
+}
+
+/* Левая часть - картинка */
+.trust-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 1.5rem;
+}
+
+.trust-image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(98,167,68,0.05), rgba(98,167,68,0.02) 50%, transparent);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* Фото с обрезанным углом и скруглениями */
+.trust-image-modern {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
+  /*clip-path: polygon(
+    0px 0px,
+    35% 0px,
+    35% 180px,
+    60000px 0%,
+    0% 100%
+  );*/
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.trust-image-modern:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 1024px) {
+  .trust-image-modern {
+    height: 380px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trust-image-modern {
+    height: 300px;
+    border-radius: 12px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-image-modern {
+    height: 250px;
+  }
+}
+
+/* Правая часть - текст */
+.h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .h2 {
+    text-align: left;
+  }
+}
+
+.trust-list-custom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.trust-item-custom {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.trust-item-custom:hover {
+  transform: translateX(4px);
+}
+
+.trust-dot-custom {
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary, #2563eb);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.trust-list-custom h3 {
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.trust-list-custom .lead {
+  margin: 0.25rem 0 0;
+  line-height: 1.6;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* Кнопка */
+.btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-lg {
+  font-size: 1.125rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-left {
+    text-align: left;
+  }
+  .lg\:w-auto {
+    width: auto;
+  }
+}
+
+/* ================= СЕКЦИЯ НОВОСТЕЙ ================= */
+.news-section {
+  position: relative;
+  padding: 50px 20px;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.news-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.news-section::before,
+.news-section::after {
+  content: "";
+  position: absolute;
+  background: #4caf50;
+  z-index: 0;
+}
+
+.news-section::before {
+  left: 0; top: 20px; width: 220px; height: 220px;
+  clip-path: polygon(0 0, calc(100% - 50px) 0, 50% 50px, 100% 100%, 0 100%);
+}
+
+.news-section::after {
+  right: 0; top: 0; width: 140px; height: 100%;
+  clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+}
+
+.news-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.news-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.news-card {
+  background: white;
+  border: 2px solid #4caf50;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.25s ease;
+}
+
+.news-card:hover { transform: translateY(-6px); }
+
+.news-card__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.news-content { padding: 14px; }
+
+.news-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.date {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.news-card__excerpt {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.news-button {
+  display: inline-block;
+  margin-top: 30px;
+  background: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  float: right;
+}
+
+/* ================= СЕКЦИЯ ПРОЕКТОВ ================= */
+.projects-section {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.projects-section__container { max-width: 1200px; margin: 0 auto; }
+
+.projects-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.projects-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: #f9f9f9;
+  border: 2px solid #4caf50;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+}
+
+.project-card:hover { transform: translateY(-6px); }
+
+.project-card__title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+
+.project-card__excerpt { font-size: 14px; color: #333; margin-bottom: 16px; line-height: 1.5; }
+
+.project-button {
+  align-self: flex-start;
+  background: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.project-button:hover { background: #43a047; }
+
+.project-badge {
+  display: inline-block;
+  margin-top: auto;
+  padding: 8px 16px;
+  background: #ffc107;
+  color: #000;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ================= СЕКЦИЯ УСЛУГ ================= */
+.services-section {
+  padding: 60px 20px;
+  background: #f5f5f5;
+}
+
+.services-container { max-width: 1200px; margin: 0 auto; }
+
+.services-title { font-size: 28px; font-weight: 700; margin-bottom: 40px; }
+
+.services-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  background: #fff;
+  border: 2px solid #4caf50;
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.25s ease;
+}
+
+.service-card:hover { transform: translateY(-6px); }
+
+.service-card__title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+
+.service-card__excerpt { font-size: 14px; color: #333; margin-bottom: 16px; line-height: 1.5; }
+
+.service-arrow {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  font-size: 22px;
+  color: #4caf50;
+  transition: transform 0.2s ease;
+}
+
+.service-arrow:hover { transform: translateX(4px); }
+
+.services-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.services-footer__text { font-size: 15px; color: #444; margin-bottom: 20px; }
+
+.services-button {
+  display: inline-block;
+  background: #4caf50;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.services-button:hover { background: #43a047; }
+
+/* ================= СЕКЦИЯ МОНИТОРИНГА ================= */
+.monitoring-section {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.monitoring-container { max-width: 1200px; margin: 0 auto; }
+
+.monitoring-title { font-size: 28px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+
+.monitoring-subtitle { font-size: 16px; color: #555; text-align: center; margin-bottom: 40px; }
+
+.monitoring-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.chart-box {
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.chart-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; text-align: center; }
+
+.monitoring-footer { margin-top: 40px; text-align: center; }
+
+.monitoring-button {
+  display: inline-block;
+  background: #4CAF50;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.monitoring-button:hover { background: #43a047; }
+
+/* ================= ЛИНЕЙНЫЙ ГРАФИК ================= */
+.accident-monitoring {
+  padding: 60px 20px;
+  background: #f5f5f5;
+  border-radius: 16px;
+  max-width: 1200px;
+  margin: 40px auto;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.accident-monitoring h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+
+.accident-monitoring p { font-size: 16px; color: #555; margin-bottom: 24px; }
+
+.type-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.type-buttons button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.type-buttons button:hover { background-color: #43a047; color: white; }
+
+.type-buttons .active {
+  background-color: #2563eb;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+}
+
+.chart-container {
+  width: 100%;
+  height: 400px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* ================= АДАПТИВНОСТЬ ================= */
+@media (max-width: 768px) {
+  .accident-monitoring { padding: 40px 16px; }
+  .chart-container { height: 300px; }
+  .type-buttons button { padding: 8px 14px; font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .chart-container { height: 250px; }
+  .type-buttons { gap: 6px; }
+  .trust-image-modern { height: 250px; border-radius: 12px; }
+}

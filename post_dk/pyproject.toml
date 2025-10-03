@@ -1,0 +1,14 @@
+[project]
+name = "post-dk"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.117.1",
+    "httpx>=0.28.1",
+    "logging>=0.4.9.6",
+    "pydantic-settings>=2.11.0",
+    "pydentic>=0.0.1.dev3",
+    "uvicorn>=0.37.0",
+]

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Cookie без входа</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 5px; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .result { margin-top: 10px; padding: 10px; border-radius: 3px; font-family: monospace; }
+        .token-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        .step { margin: 10px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍪 Тестирование Cookie аутентификации</h1>
+        <p>Эта страница позволяет протестировать систему аутентификации без ввода логина/пароля</p>
+
+        <div class="section info">
+            <h3>📋 Инструкция:</h3>
+            <div class="step">
+                <strong>Шаг 1:</strong> Создайте тестовый токен с помощью Python скрипта
+            </div>
+            <div class="step">
+                <strong>Шаг 2:</strong> Вставьте токен в поле ниже и нажмите "Установить Cookie"
+            </div>
+            <div class="step">
+                <strong>Шаг 3:</strong> Перейдите на главную страницу сайта - должно автоматически войти в редактор
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>1. 🔑 Создание тестового токена</h3>
+            <p>Запустите в терминале:</p>
+            <div class="result" style="background: #f8f9fa;">
+                python create_test_token.py
+            </div>
+            <p>Скопируйте полученный токен и вставьте в поле ниже:</p>
+            <input type="text" id="tokenInput" class="token-input" placeholder="Вставьте JWT токен сюда...">
+            <br>
+            <button class="btn-primary" onclick="setTestToken()">Установить Cookie</button>
+            <button class="btn-success" onclick="generateTestToken()">Сгенерировать тестовый токен</button>
+            <div id="tokenResult" class="result"></div>
+        </div>
+
+        <div class="section">
+            <h3>2. 🍪 Проверка Cookie</h3>
+            <button class="btn-primary" onclick="checkCookies()">Показать все Cookie</button>
+            <button class="btn-success" onclick="testAuthAPI()">Тестировать API аутентификации</button>
+            <div id="cookieResult" class="result"></div>
+        </div>
+
+        <div class="section">
+            <h3>3. 🧪 Тестирование аутентификации</h3>
+            <button class="btn-success" onclick="testAuthStatus()">Проверить статус аутентификации</button>
+            <button class="btn-primary" onclick="goToMainSite()">Перейти на главную страницу</button>
+            <button class="btn-danger" onclick="clearCookies()">Очистить все Cookie</button>
+            <div id="authResult" class="result"></div>
+        </div>
+
+        <div class="section">
+            <h3>4. 🔍 Отладочная информация</h3>
+            <button class="btn-primary" onclick="showDebugInfo()">Показать отладочную информацию</button>
+            <div id="debugResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api';
+
+        // Функция для работы с cookie
+        function setCookie(name, value, days = 7) {
+            const date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            const expires = `; expires=${date.toUTCString()}`;
+            document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/; SameSite=Lax`;
+        }
+
+        function getCookie(name) {
+            const nameEQ = encodeURIComponent(name) + '=';
+            const parts = document.cookie.split(';');
+            for (let i = 0; i < parts.length; i++) {
+                let c = parts[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) {
+                    try { return decodeURIComponent(c.substring(nameEQ.length, c.length)); } 
+                    catch { return c.substring(nameEQ.length, c.length); }
+                }
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+        }
+
+        function setTestToken() {
+            const token = document.getElementById('tokenInput').value.trim();
+            if (!token) {
+                document.getElementById('tokenResult').innerHTML = '<div class="error">❌ Введите токен!</div>';
+                return;
+            }
+
+            setCookie('access_token', token);
+            localStorage.setItem('authRole', 'editor');
+            
+            document.getElementById('tokenResult').innerHTML = '<div class="success">✅ Cookie установлен! Теперь можно тестировать аутентификацию.</div>';
+        }
+
+        async function generateTestToken() {
+            const resultDiv = document.getElementById('tokenResult');
+            try {
+                resultDiv.innerHTML = '<div class="info">🔄 Генерируем новый токен с сервера...</div>';
+                
+                console.log('Запрашиваем токен с сервера...');
+                
+                const response = await fetch('http://localhost:8000/api/user/auth/generate-token', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                console.log('Ответ сервера:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                const token = data.token;
+                
+                console.log('Получен токен:', token);
+                
+                // Устанавливаем токен в поле ввода
+                document.getElementById('tokenInput').value = token;
+                
+                resultDiv.innerHTML = `<div class="success">✅ Новый JWT токен сгенерирован с сервера!<br>Действует: ${data.expires_in}<br>Токен: ${token.substring(0, 50)}...</div>`;
+                
+            } catch (error) {
+                console.error('Ошибка генерации токена:', error);
+                resultDiv.innerHTML = `<div class="error">❌ Ошибка генерации токена: ${error.message}<br>Убедитесь, что сервер запущен на порту 8000</div>`;
+            }
+        }
+
+        function checkCookies() {
+            const cookies = document.cookie;
+            const accessToken = getCookie('access_token');
+            const authRole = localStorage.getItem('authRole');
+            
+            document.getElementById('cookieResult').innerHTML = `
+                <div class="info">
+                    <strong>Все Cookie:</strong><br>
+                    ${cookies || 'Нет cookie'}<br><br>
+                    <strong>access_token:</strong><br>
+                    ${accessToken || 'Не найден'}<br><br>
+                    <strong>localStorage authRole:</strong><br>
+                    ${authRole || 'Не найден'}
+                </div>
+            `;
+        }
+
+        async function testAuthAPI() {
+            const resultDiv = document.getElementById('cookieResult');
+            try {
+                const response = await fetch(`${API_BASE}/user/auth/me`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="success">✅ API аутентификации работает!<br>Пользователь: ${data.login} (${data.role})</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Ошибка API: ${data.detail || 'Неизвестная ошибка'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Ошибка сети: ${error.message}</div>`;
+            }
+        }
+
+        async function testAuthStatus() {
+            const resultDiv = document.getElementById('authResult');
+            const accessToken = getCookie('access_token');
+            
+            if (!accessToken) {
+                resultDiv.innerHTML = '<div class="error">❌ Cookie access_token не найден!</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/user/auth/me`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="success">✅ Аутентификация успешна!<br>ID: ${data.id}<br>Логин: ${data.login}<br>Роль: ${data.role}<br><br>Теперь можно переходить на главную страницу!</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Ошибка аутентификации: ${data.detail || 'Неизвестная ошибка'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Ошибка сети: ${error.message}</div>`;
+            }
+        }
+
+        function goToMainSite() {
+            window.open('http://localhost:5173', '_blank');
+        }
+
+        function clearCookies() {
+            eraseCookie('access_token');
+            localStorage.removeItem('authRole');
+            document.getElementById('authResult').innerHTML = '<div class="info">🧹 Cookie очищены!</div>';
+        }
+
+        function showDebugInfo() {
+            const debugInfo = {
+                cookies: document.cookie,
+                localStorage: {
+                    authRole: localStorage.getItem('authRole')
+                },
+                userAgent: navigator.userAgent,
+                currentURL: window.location.href,
+                timestamp: new Date().toISOString()
+            };
+
+            document.getElementById('debugResult').innerHTML = `
+                <div class="info">
+                    <strong>Отладочная информация:</strong><br>
+                    <pre>${JSON.stringify(debugInfo, null, 2)}</pre>
+                </div>
+            `;
+        }
+
+        // Проверяем статус при загрузке страницы
+        window.onload = function() {
+            checkCookies();
+        };
+    </script>
+</body>
+</html>
